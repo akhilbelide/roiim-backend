@@ -85,7 +85,7 @@ exports.postCreateCust=(req,response,next) => {
                             }).then(res=>{
                                 console.log('line 81',res)
                                 if(res.statusCode==200){
-                                    res.status(200).json({
+                                    response.status(200).json({
                                         message:'successful',
                                         token:res.data.singleUseCustomerToken,
                                         id:res.data.id
@@ -97,7 +97,7 @@ exports.postCreateCust=(req,response,next) => {
     })
     .catch(err => {
         console.log('line 98 ', err)
-        res.status(500).json({
+        response.status(500).json({
             message:'failure',
             })
     })
