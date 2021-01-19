@@ -29,7 +29,7 @@ exports.postCreateCust=(req,res,next) => {
                     res.status(200).json({
                         message:'successful',
                         token:res.data.singleUseCustomerToken,
-                        id=res.data.id
+                        id:res.data.id
                     })
                   }
               }).catch(err => console.log(err))
