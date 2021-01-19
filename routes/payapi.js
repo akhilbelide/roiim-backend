@@ -6,7 +6,7 @@ const router=express.Router()
 const payapiController=require('../controllers/payapi')
 
 router.post('/',payapiController.postPayment)
-router.post('/test',payapiController.getTest)
+router.get('/test',payapiController.getTest)
 
 
-module.export=router
+module.exports = router;
