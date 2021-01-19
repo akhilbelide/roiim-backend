@@ -4,7 +4,7 @@ const config=require('./config')
 
 
 exports.postCreateCust=(req,response,next) => {
-    const refnum=req.body.data.merchantRefNum
+    const refnum=req.body.merchantRefNum
     console.log('RefNum line 8 ',refnum)
 
     axios.get('https://api.test.paysafe.com/paymenthub/v1/customers?merchantCustomerId='+ refnum, {
