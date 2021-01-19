@@ -1,6 +1,6 @@
 const express=require('express')
 
-const app=expresss()
+const app=express()
 const payapiRoutes=require('./routes/payapi')
 
 app.use((req,res,next) => {
