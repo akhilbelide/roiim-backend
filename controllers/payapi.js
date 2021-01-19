@@ -5,6 +5,7 @@ exports.getTest=(req,res,next) => {
 }
 
 exports.postPayment=(req,res,next)=>{
+    console.log(req.body)
     var options = {
         'method': 'POST',
         'url': 'https://private-anon-8467725ed3-paysafeapipaymenthubv1.apiary-proxy.com/paymenthub/v1/payments',
@@ -19,4 +20,8 @@ exports.postPayment=(req,res,next)=>{
         if (error) throw new Error(error);
         console.log(response.body);
       });
+
+      res.status(200).json({data:{
+          message:'successful'
+      }})
 }
