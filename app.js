@@ -17,7 +17,7 @@ app.use('/create-customer', createcustController.postCreateCust)
 
 app.use('/payment', payapiRoutes)
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 8081);
 
 
 

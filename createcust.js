@@ -3,7 +3,7 @@ const axios=require('axios')
 const config=require('./config')
 
 
-exports.postCreateCust=(req,res,next) => {
+exports.postCreateCust=(req,response,next) => {
     const refnum=req.body.data.merchantRefNum
     console.log('RefNum line 8 ',refnum)
 
@@ -14,10 +14,12 @@ exports.postCreateCust=(req,res,next) => {
         }
     })
     .then(res=>{
-        console.log('Result after fiding custid line 17 ',res)
-        if(res.statusCode==201){
-            const custId=res.body.id
-            console.log('line 20 ',res.body)
+        console.log('Result after fiding custid line 17 ',res.status)
+        console.log(typeof(res.status))
+        if(res.status=='200'){
+        
+            const custId=res.data.id
+            console.log('line 20 ',res.data)
             axios.post('https://api.test.paysafe.com/paymenthub/v1/customers/'+custId+'/singleusecustomertokens',{
                 "merchantRefNum": refnum,
                 "paymentTypes": [
@@ -28,16 +30,19 @@ exports.postCreateCust=(req,res,next) => {
                     'Authorization':'Basic ' + config.key,
                     'Content-Type':'application/json'
                 }
-              }).then(res=>{
-                  console.log('after getting token line 32',res)
-                  if(res.statusCode==200){
-                    res.status(200).json({
+              }).then(resp=>{
+                  console.log('after getting token line 32',resp.data)
+                  if(resp.status=='201'){
+                    response.status(200).json({
                         message:'successful',
-                        token:res.data.singleUseCustomerToken,
-                        id:res.data.id
+                        token:resp.data.singleUseCustomerToken,
+                        id:resp.data.customerId
                     })
                   }
               }).catch(err => console.log(err))
+        }
+        else if(res.status==404){
+            console.log("hey......")
         }
         else{
             console.log('not found line 43')
@@ -90,5 +95,10 @@ exports.postCreateCust=(req,res,next) => {
                 })
             }
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        console.log('line 98 ', err)
+        res.status(500).json({
+            message:'failure',
+            })
+    })
 }
