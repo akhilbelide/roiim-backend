@@ -3,7 +3,7 @@ const bodyparser=require('body-parser')
 
 const app=express()
 const payapiRoutes=require('./routes/payapi')
-
+const createcustController=require('./createcust')
 app.use(bodyparser.json())
 
 app.use((req,res,next) => {
@@ -12,6 +12,8 @@ app.use((req,res,next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 })
+
+app.use('/create-customer', createcustController.postCreateCust)
 
 app.use('/payment', payapiRoutes)
 
