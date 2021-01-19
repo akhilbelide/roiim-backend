@@ -1,5 +1,9 @@
 const request=require('request')
 
+exports.getTest=(req,res,next) => {
+    res.send('Hi! From Heroku')
+}
+
 exports.postPayment=(req,res,next)=>{
     var options = {
         'method': 'POST',
