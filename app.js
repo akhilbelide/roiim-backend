@@ -4,7 +4,7 @@ const cors=require('cors')
 
 const app=express()
 const payapiRoutes=require('./routes/payapi')
-const createcustController=require('./createcust')
+const createcustRoutes=require('./routes/createcustomer')
 app.use(bodyparser.json())
 
 app.use(cors())
@@ -16,7 +16,7 @@ app.use((req,res,next) => {
     next();
 })
 
-app.use('/create-customer', createcustController.postCreateCust)
+app.use('/create-customer', createcustRoutes)
 
 app.use('/payment', payapiRoutes)
 
